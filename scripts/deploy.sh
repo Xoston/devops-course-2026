@@ -7,7 +7,6 @@ REMOTE="devops"
 REMOTE_DIR="/var/www/devops-site"
 SITE_URL="https://devops.local"
 CA_CERT="${HOME}/devops.crt"
-LOCAL_DIR="$(git rev-parse --show-toplevel)/site/"
 
 # 1. Разбор аргумента --dry-run
 DRY_RUN=0
