@@ -8,6 +8,13 @@ REMOTE_DIR="/var/www/devops-site"
 SITE_URL="https://devops.local"
 CA_CERT="${HOME}/devops.crt"
 
+# Исправление путей для Windows (Git Bash)
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+if command -v cygpath >/dev/null 2>&1; then
+    REPO_ROOT="$(cygpath -u "${REPO_ROOT}")"
+fi
+LOCAL_DIR="${REPO_ROOT}/site/"
+
 # 1. Разбор аргумента --dry-run
 DRY_RUN=0
 if [[ "${1:-}" == "--dry-run" ]]; then
@@ -40,14 +47,15 @@ if [[ ${DRY_RUN} -eq 1 ]]; then
     rsync "${RSYNC_OPTS[@]}" --dry-run "${LOCAL_DIR}" "${REMOTE}:${REMOTE_DIR}/"
     exit 0
 fi
+
 rsync "${RSYNC_OPTS[@]}" "${LOCAL_DIR}" "${REMOTE}:${REMOTE_DIR}/"
 
+# 4. Проверка доступности (требование 6)
+if ! curl -fsS --cacert "${CA_CERT}" -o /dev/null "${SITE_URL}/"; then
+    echo "Error: site ${SITE_URL} is not available or certificate invalid" >&2
     exit 1
 fi
 
 # 5. Успешное завершение (требование 7)
 echo "Deployed commit: ${COMMIT_HASH}"
-exit 0# 4. Проверка доступности (требование 6)
-if ! curl -fsS --cacert "${CA_CERT}" -o /dev/null "${SITE_URL}/"; then
-    echo "Error: site ${SITE_URL} is not available or certificate invalid" >&2
-
+exit 0
