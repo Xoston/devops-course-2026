@@ -1,0 +1,13 @@
+* [33m8ec54ab[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;32mdemo/merge-example[m[33m)[m docs: add details for feature A
+* [33m7f0d18e[m feat: add feature A description
+* [33m85883d2[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m docs: add initial course files
+* [33ma5f8050[m 21
+*   [33mb748af2[m Merge branch 'main' of github.com:Xoston/devops-course-2026
+[32m|[m[33m\[m  
+[32m|[m * [33me30eb5d[m Delete about_me.md
+* [33m|[m [33me31fbca[m 1
+[33m|[m[33m/[m  
+[33m|[m * [33m2380041[m[33m ([m[1;31morigin/feature/hobby-project[m[33m, [m[1;32mfeature/hobby-project[m[33m)[m docs: add SVN vs Git comparison answers
+[33m|[m * [33mbd35533[m docs: add IDE vs CLI notes
+[33m|[m * [33m70f79bd[m feat: add hobby project description
+[33m|[m[33m/[m  
