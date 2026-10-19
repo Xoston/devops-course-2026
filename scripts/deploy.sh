@@ -51,7 +51,8 @@ fi
 rsync "${RSYNC_OPTS[@]}" "${LOCAL_DIR}" "${REMOTE}:${REMOTE_DIR}/"
 
 # 4. Проверка доступности (требование 6)
-if ! curl -fsS --cacert "${CA_CERT}" -o /dev/null "${SITE_URL}/"; then
+# Добавлены таймауты --connect-timeout 5 и --max-time 10
+if ! curl -fsS --connect-timeout 5 --max-time 10 --cacert "${CA_CERT}" -o /dev/null "${SITE_URL}/"; then
     echo "Error: site ${SITE_URL} is not available or certificate invalid" >&2
     exit 1
 fi
